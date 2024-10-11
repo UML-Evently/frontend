@@ -1,0 +1,17 @@
+services:
+  web:
+    image: ghcr.io/uml-evently/evently-frontend:main
+    restart: always
+    stdin_open: true
+    tty: true
+    networks:
+      - reverseproxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.evently-frontend.rule=Host(`evently.docsystem.xyz`)"
+    environment:
+      - TZ=America/Toronto
+
+networks:
+  reverseproxy:
+    external: true
